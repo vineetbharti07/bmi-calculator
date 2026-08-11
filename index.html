@@ -1,127 +1,157 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>BMI Calculator</title>
-<p style="font-size:18px;">✨ Created by Vineet Bharti ✨</p>
-<style>
-body{
-  font-family: Arial, sans-serif;
-  text-align:center;
-  margin:0;
-  padding:40px 20px;
-  background:linear-gradient(135deg,#89f7fe,#66a6ff);
-}
+    <title>Vineet's BMI Calculator</title>
 
-.box{
-  max-width:400px;
-  margin:auto;
-  background:white;
-  padding:30px;
-  border-radius:25px;
-  box-shadow:0 10px 30px #555;
-}
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+            min-height: 100vh;
+            padding-top: 40px;
+        }
 
-h1{
-  color:#2457a6;
-}
+        .box {
+            width: 85%;
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            padding: 30px 20px;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+        }
 
-input{
-  width:90%;
-  padding:14px;
-  margin:10px;
-  border:2px solid #66a6ff;
-  border-radius:12px;
-  font-size:16px;
-}
+        h1 {
+            color: #2457a6;
+            margin-bottom: 5px;
+        }
 
-button{
-  padding:14px 30px;
-  border:0;
-  border-radius:12px;
-  background:#2457a6;
-  color:white;
-  font-size:17px;
-  cursor:pointer;
-}
+        .creator {
+            color: #777;
+            font-size: 17px;
+            margin-bottom: 25px;
+        }
 
-#sticker{
-  font-size:60px;
-  margin:15px;
-}
+        input {
+            width: 85%;
+            padding: 14px;
+            margin: 8px;
+            border: 2px solid #74a9ff;
+            border-radius: 12px;
+            font-size: 16px;
+        }
 
-#result{
-  font-size:20px;
-  font-weight:bold;
-}
-</style>
+        button {
+            margin-top: 15px;
+            padding: 14px 25px;
+            border: none;
+            border-radius: 12px;
+            background: #2457a6;
+            color: white;
+            font-size: 17px;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        #sticker {
+            font-size: 65px;
+            margin-top: 20px;
+        }
+
+        #result {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .footer {
+            margin-top: 25px;
+            color: #777;
+            font-size: 14px;
+        }
+    </style>
 </head>
 
 <body>
 
 <div class="box">
 
-<h1>⚖️ BMI Calculator</h1>
+    <h1>⚖️ BMI Calculator</h1>
 
-<p>Enter your weight and height</p>
+    <div class="creator">
+        ✨ Created by Vineet Bharti ✨
+    </div>
 
-<input id="w" type="number" placeholder="Weight (kg)">
+    <input id="weight" type="number" placeholder="Weight (kg)">
 
-<input id="h" type="number" placeholder="Height (cm)">
+    <input id="height" type="number" placeholder="Height (cm)">
 
-<br>
+    <br>
 
-<button onclick="bmi()">Calculate BMI</button>
+    <button onclick="calculateBMI()">Calculate BMI</button>
 
-<div id="sticker"></div>
-<div id="result"></div>
+    <div id="sticker"></div>
+
+    <div id="result"></div>
+
+    <div class="footer">
+        💙 Stay Healthy & Stay Happy
+    </div>
 
 </div>
 
 <script>
 
-function bmi(){
+function calculateBMI() {
 
-let w = Number(document.getElementById("w").value);
-let h = Number(document.getElementById("h").value);
+    let weight = Number(document.getElementById("weight").value);
+    let height = Number(document.getElementById("height").value);
 
-if(w<=0 || h<=0){
-document.getElementById("result").innerHTML =
-"Please enter valid values.";
-document.getElementById("sticker").innerHTML="⚠️";
-return;
-}
+    if (weight <= 0 || height <= 0) {
+        document.getElementById("sticker").innerHTML = "⚠️";
+        document.getElementById("result").innerHTML =
+            "Please enter valid weight and height.";
+        return;
+    }
 
-h = h/100;
+    height = height / 100;
 
-let b = w/(h*h);
-b = b.toFixed(1);
+    let bmi = weight / (height * height);
+    bmi = bmi.toFixed(1);
 
-let result = document.getElementById("result");
-let sticker = document.getElementById("sticker");
+    let sticker = document.getElementById("sticker");
+    let result = document.getElementById("result");
 
-if(b < 18.5){
-sticker.innerHTML="🥗";
-result.innerHTML="BMI: "+b+"<br>Below the usual adult BMI range";
-}
+    if (bmi < 18.5) {
+        sticker.innerHTML = "🥗";
+        result.innerHTML =
+            "BMI: " + bmi + "<br>Below the usual adult BMI range";
+    }
 
-else if(b < 25){
-sticker.innerHTML="😊";
-result.innerHTML="BMI: "+b+"<br>In the usual adult BMI range 🎉";
-}
+    else if (bmi < 25) {
+        sticker.innerHTML = "😊🎉";
+        result.innerHTML =
+            "BMI: " + bmi + "<br>In the usual adult BMI range!";
+    }
 
-else if(b < 30){
-sticker.innerHTML="⚠️";
-result.innerHTML="BMI: "+b+"<br>Above the usual adult BMI range";
-}
+    else if (bmi < 30) {
+        sticker.innerHTML = "⚠️";
+        result.innerHTML =
+            "BMI: " + bmi + "<br>Above the usual adult BMI range";
+    }
 
-else{
-sticker.innerHTML="💪";
-result.innerHTML="BMI: "+b+"<br>High BMI range";
-}
-
+    else {
+        sticker.innerHTML = "💪⚠️";
+        result.innerHTML =
+            "BMI: " + bmi + "<br>High BMI range";
+    }
 }
 
 </script>
 
 </body>
-  </html>
+</html>

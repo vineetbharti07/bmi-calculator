@@ -1,20 +1,127 @@
-<h1>BMI Calculator</h1>
+<!DOCTYPE html>
+<html>
+<head>
+<title>BMI Calculator</title>
 
-Weight (kg):
-<input id="w" type="number"><br><br>
+<style>
+body{
+  font-family: Arial, sans-serif;
+  text-align:center;
+  margin:0;
+  padding:40px 20px;
+  background:linear-gradient(135deg,#89f7fe,#66a6ff);
+}
 
-Height (cm):
-<input id="h" type="number"><br><br>
+.box{
+  max-width:400px;
+  margin:auto;
+  background:white;
+  padding:30px;
+  border-radius:25px;
+  box-shadow:0 10px 30px #555;
+}
+
+h1{
+  color:#2457a6;
+}
+
+input{
+  width:90%;
+  padding:14px;
+  margin:10px;
+  border:2px solid #66a6ff;
+  border-radius:12px;
+  font-size:16px;
+}
+
+button{
+  padding:14px 30px;
+  border:0;
+  border-radius:12px;
+  background:#2457a6;
+  color:white;
+  font-size:17px;
+  cursor:pointer;
+}
+
+#sticker{
+  font-size:60px;
+  margin:15px;
+}
+
+#result{
+  font-size:20px;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h1>⚖️ BMI Calculator</h1>
+
+<p>Enter your weight and height</p>
+
+<input id="w" type="number" placeholder="Weight (kg)">
+
+<input id="h" type="number" placeholder="Height (cm)">
+
+<br>
 
 <button onclick="bmi()">Calculate BMI</button>
 
-<h2 id="r"></h2>
+<div id="sticker"></div>
+<div id="result"></div>
+
+</div>
 
 <script>
+
 function bmi(){
-let w=document.getElementById("w").value;
-let h=document.getElementById("h").value/100;
-let b=(w/(h*h)).toFixed(1);
-document.getElementById("r").innerHTML="Your BMI is "+b;
+
+let w = Number(document.getElementById("w").value);
+let h = Number(document.getElementById("h").value);
+
+if(w<=0 || h<=0){
+document.getElementById("result").innerHTML =
+"Please enter valid values.";
+document.getElementById("sticker").innerHTML="⚠️";
+return;
 }
+
+h = h/100;
+
+let b = w/(h*h);
+b = b.toFixed(1);
+
+let result = document.getElementById("result");
+let sticker = document.getElementById("sticker");
+
+if(b < 18.5){
+sticker.innerHTML="🥗";
+result.innerHTML="BMI: "+b+"<br>Below the usual adult BMI range";
+}
+
+else if(b < 25){
+sticker.innerHTML="😊";
+result.innerHTML="BMI: "+b+"<br>In the usual adult BMI range 🎉";
+}
+
+else if(b < 30){
+sticker.innerHTML="⚠️";
+result.innerHTML="BMI: "+b+"<br>Above the usual adult BMI range";
+}
+
+else{
+sticker.innerHTML="💪";
+result.innerHTML="BMI: "+b+"<br>High BMI range";
+}
+
+}
+
 </script>
+
+</body>
+  </html>

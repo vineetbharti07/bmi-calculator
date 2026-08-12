@@ -1,106 +1,169 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Vineet's BMI Calculator</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
-            min-height: 100vh;
-            padding-top: 40px;
-        }
+<title>Vineet's BMI Wellness</title>
 
-        .box {
-            width: 85%;
-            max-width: 400px;
-            margin: auto;
-            background: white;
-            padding: 30px 20px;
-            border-radius: 25px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-        }
+<style>
+* {
+    box-sizing: border-box;
+}
 
-        h1 {
-            color: #2457a6;
-            margin-bottom: 5px;
-        }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    min-height: 100vh;
+    padding: 30px 15px;
+    background: linear-gradient(135deg, #667eea, #764ba2, #6dd5ed);
+    background-size: 300% 300%;
+    animation: gradient 10s ease infinite;
+}
 
-        .creator {
-            color: #777;
-            font-size: 17px;
-            margin-bottom: 25px;
-        }
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 
-        input {
-            width: 85%;
-            padding: 14px;
-            margin: 8px;
-            border: 2px solid #74a9ff;
-            border-radius: 12px;
-            font-size: 16px;
-        }
+.box {
+    max-width: 430px;
+    margin: auto;
+    padding: 25px;
+    border-radius: 25px;
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 10px 35px rgba(0,0,0,0.25);
+    color: white;
+}
 
-        button {
-            margin-top: 15px;
-            padding: 14px 25px;
-            border: none;
-            border-radius: 12px;
-            background: #2457a6;
-            color: white;
-            font-size: 17px;
-        }
+h1 {
+    margin-bottom: 5px;
+}
 
-        button:active {
-            transform: scale(0.95);
-        }
+.subtitle {
+    opacity: 0.9;
+    margin-bottom: 25px;
+}
 
-        #sticker {
-            font-size: 65px;
-            margin-top: 20px;
-        }
+label {
+    display: block;
+    text-align: left;
+    margin-top: 15px;
+    font-weight: bold;
+}
 
-        #result {
-            font-size: 20px;
-            font-weight: bold;
-            margin-top: 10px;
-        }
+input {
+    width: 100%;
+    padding: 13px;
+    margin-top: 7px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    outline: none;
+}
 
-        .footer {
-            margin-top: 25px;
-            color: #777;
-            font-size: 14px;
-        }
-    </style>
+button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 12px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.calculate {
+    background: white;
+    color: #6246a8;
+}
+
+.reset {
+    background: rgba(255,255,255,0.25);
+    color: white;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.sticker {
+    font-size: 60px;
+    margin-top: 10px;
+}
+
+.todo {
+    margin-top: 25px;
+    padding: 18px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 18px;
+    text-align: left;
+}
+
+.todo h2 {
+    text-align: center;
+}
+
+.todo label {
+    font-weight: normal;
+    margin: 12px 0;
+}
+
+.todo input {
+    width: auto;
+    margin-right: 8px;
+}
+
+.note {
+    font-size: 13px;
+    margin-top: 20px;
+    opacity: 0.85;
+}
+</style>
 </head>
 
 <body>
 
 <div class="box">
 
-    <h1>⚖️ BMI Calculator</h1>
+<h1>⚖️ Vineet's BMI Wellness</h1>
 
-    <div class="creator">
-        ✨ Created by Vineet Bharti ✨
-    </div>
+<p class="subtitle">
+Healthy habits • Daily routine • Stay active 🌱
+</p>
 
-    <input id="weight" type="number" placeholder="Weight (kg)">
+<label>Weight (kg)</label>
+<input id="weight" type="number" placeholder="Enter your weight">
 
-    <input id="height" type="number" placeholder="Height (cm)">
+<label>Height (cm)</label>
+<input id="height" type="number" placeholder="Enter your height">
 
-    <br>
+<button class="calculate" onclick="calculateBMI()">
+🧮 Calculate BMI
+</button>
 
-    <button onclick="calculateBMI()">Calculate BMI</button>
+<button class="reset" onclick="resetBMI()">
+🔄 Reset
+</button>
 
-    <div id="sticker"></div>
+<div id="result"></div>
+<div id="sticker"></div>
+<div id="todo"></div>
 
-    <div id="result"></div>
-
-    <div class="footer">
-        💙 Stay Healthy & Stay Happy
-    </div>
+<p class="note">
+BMI is only a general screening measure. For teenagers,
+BMI should be interpreted using age- and sex-specific growth charts.
+</p>
 
 </div>
 
@@ -108,50 +171,157 @@
 
 function calculateBMI() {
 
-    let weight = Number(document.getElementById("weight").value);
-    let height = Number(document.getElementById("height").value);
+    let weight = parseFloat(document.getElementById("weight").value);
+    let height = parseFloat(document.getElementById("height").value);
 
-    if (weight <= 0 || height <= 0) {
-        document.getElementById("sticker").innerHTML = "⚠️";
+    if (!weight || !height || weight <= 0 || height <= 0) {
         document.getElementById("result").innerHTML =
-            "Please enter valid weight and height.";
+        "⚠️ Please enter valid weight and height.";
+        document.getElementById("sticker").innerHTML = "🙂";
+        document.getElementById("todo").innerHTML = "";
         return;
     }
 
-    height = height / 100;
-
-    let bmi = weight / (height * height);
+    let heightMeter = height / 100;
+    let bmi = weight / (heightMeter * heightMeter);
     bmi = bmi.toFixed(1);
 
-    let sticker = document.getElementById("sticker");
-    let result = document.getElementById("result");
+    document.getElementById("result").innerHTML =
+    "Your BMI: " + bmi;
 
     if (bmi < 18.5) {
-        sticker.innerHTML = "🥗";
-        result.innerHTML =
-            "BMI: " + bmi + "<br>Below the usual adult BMI range";
-    }
 
-    else if (bmi < 25) {
-        sticker.innerHTML = "😊🎉";
-        result.innerHTML =
-            "BMI: " + bmi + "<br>In the usual adult BMI range!";
-    }
+        document.getElementById("sticker").innerHTML = "🌱😊";
 
-    else if (bmi < 30) {
-        sticker.innerHTML = "⚠️";
-        result.innerHTML =
-            "BMI: " + bmi + "<br>Above the usual adult BMI range";
-    }
+        document.getElementById("todo").innerHTML = `
+        <div class="todo">
+        <h2>🥗 Your Wellness To-Do List</h2>
 
-    else {
-        sticker.innerHTML = "💪⚠️";
-        result.innerHTML =
-            "BMI: " + bmi + "<br>High BMI range";
+        <label>
+        <input type="checkbox">
+        🌅 7:00 AM — Have a balanced breakfast
+        </label>
+
+        <label>
+        <input type="checkbox">
+        🍎 10:30 AM — Have a nutritious snack
+        </label>
+
+        <label>
+        <input type="checkbox">
+        🍛 1:30 PM — Have a balanced lunch
+        </label>
+
+        <label>
+        <input type="checkbox">
+        🚶 5:00 PM — Outdoor play or enjoyable activity
+        </label>
+
+        <label>
+        <input type="checkbox">
+        🍽️ 8:30 PM — Have a balanced dinner
+        </label>
+
+        <label>
+        <input type="checkbox">
+        😴 9:30 PM — Relax and prepare for sleep
+        </label>
+        </div>
+        `;
+
+    } else if (bmi >= 18.5 && bmi < 25) {
+
+        document.getElementById("sticker").innerHTML = "🎉😄⭐";
+
+        document.getElementById("todo").innerHTML = `
+        <div class="todo">
+        <h2>🌟 Great! Keep Your Healthy Routine</h2>
+
+        <label>
+        <input type="checkbox">
+        🌅 7:00 AM — Balanced breakfast
+        </label>
+
+        <label>
+        <input type="checkbox">
+        💧 10:30 AM — Drink water
+        </label>
+
+        <label>
+        <input type="checkbox">
+        🍛 1:30 PM — Balanced lunch
+        </label>
+
+        <label>
+        <input type="checkbox">
+        🏃 5:00 PM — Play or enjoy physical activity
+        </label>
+
+        <label>
+        <input type="checkbox">
+        🥗 8:30 PM — Balanced dinner
+        </label>
+
+        <label>
+        <input type="checkbox">
+        😴 9:30 PM — Regular sleep routine
+        </label>
+        </div>
+        `;
+
+    } else {
+
+        document.getElementById("sticker").innerHTML = "🌿💪🙂";
+
+        document.getElementById("todo").innerHTML = `
+        <div class="todo">
+        <h2>💪 Healthy Habit To-Do List</h2>
+
+        <label>
+        <input type="checkbox">
+        🌅 7:00 AM — Have a balanced breakfast
+        </label>
+
+        <label>
+        <input type="checkbox">
+        🍎 10:30 AM — Choose a nutritious snack
+        </label>
+
+        <label>
+        <input type="checkbox">
+        🥗 1:30 PM — Balanced lunch with vegetables
+        </label>
+
+        <label>
+        <input type="checkbox">
+        🏃 5:00 PM — Enjoy outdoor play or activity
+        </label>
+
+        <label>
+        <input type="checkbox">
+        🍽️ 8:30 PM — Balanced dinner
+        </label>
+
+        <label>
+        <input type="checkbox">
+        😴 9:30 PM — Relax and maintain a regular sleep routine
+        </label>
+        </div>
+        `;
     }
+}
+
+function resetBMI() {
+
+    document.getElementById("weight").value = "";
+    document.getElementById("height").value = "";
+
+    document.getElementById("result").innerHTML = "";
+    document.getElementById("sticker").innerHTML = "";
+    document.getElementById("todo").innerHTML = "";
 }
 
 </script>
 
 </body>
-</html>
+    </html>
